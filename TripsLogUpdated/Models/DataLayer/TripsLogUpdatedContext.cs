@@ -27,6 +27,7 @@ namespace TripsLogUpdated.Models
             modelBuilder.ApplyConfiguration(new ActivityConfig());
             modelBuilder.ApplyConfiguration(new DestinationConfig());
             modelBuilder.ApplyConfiguration(new TripConfig());
+            modelBuilder.ApplyConfiguration(new TripActivityConfig());
         }
     }
 }

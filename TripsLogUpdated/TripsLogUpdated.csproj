@@ -7,6 +7,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20211120021604_UpdatedAccommodationIdNullableInTrip.cs" />
     <Compile Remove="Migrations\20211120021604_UpdatedAccommodationIdNullableInTrip.Designer.cs" />
+    <Compile Remove="Migrations\20211120213545_PopulateTripActivityTable.cs" />
+    <Compile Remove="Migrations\20211120213545_PopulateTripActivityTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
