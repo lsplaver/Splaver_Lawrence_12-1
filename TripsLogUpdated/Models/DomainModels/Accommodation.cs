@@ -18,5 +18,6 @@ namespace TripsLogUpdated.Models
         [CustomEmailFormat(ErrorMessage = "Email must be in the format of 'name@example.com")]
         public string AccommodationEmail { get; set; }
 
+        public ICollection<Trip> Trips { get; set; }
     }
 }

@@ -10,6 +10,7 @@ namespace TripsLogUpdated.Models
         public int ActivityId { get; set; }
         public string ActivityName { get; set; }
 
-        public ICollection<Trip> Trips { get; set; }
+        //public ICollection<Trip> Trips { get; set; }
+        public ICollection<TripActivity> TripActivities { get; set; }
     }
 }
