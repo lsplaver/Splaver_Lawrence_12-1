@@ -1,0 +1,48 @@
+﻿@model TripViewModel
+
+@{
+    ViewBag.Title = "Trip Log";
+    string userMessage = TempData?["UserMessage"]?.ToString() ?? "";
+}
+@if (userMessage != "")
+{
+    @section SubHead
+    {
+        <h2>@userMessage</h2>
+
+    }
+}
+<a asp-controller="Trip" asp-action="Add">Add trip</a>
+<table class="table-bordered table-responsive">
+    <thead class="font-weight-bold">
+        <tr>
+            <td>Destination</td>
+            <td>Start Date</td>
+            <td>End Date</td>
+            <td class="col-6">Accommodations</td>
+            <td class="col-6">Activities</td>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Trip trip in Model.Trips)
+        {
+            <tr>
+                <td>@trip.Destination.DestinationName</td>
+                <td>@trip.StartDate?.ToShortDateString()</td>
+                <td>@trip.EndDate?.ToShortDateString()</td>
+                <td class="col-6">
+                    <div class="row text-center">@trip.Accommodation.AccommodationName</div>
+                    <div class="row text-center">@trip.Accommodation.AccommodationPhone</div>
+                    <div class="row text-center">@trip.Accommodation.AccommodationEmail</div>
+                </td>
+                <td class="col-6">
+                    @foreach (var ta in trip.TripActivities)
+                    {
+                        <div class="row text-center">@ta.Activity.ActivityName</div>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
