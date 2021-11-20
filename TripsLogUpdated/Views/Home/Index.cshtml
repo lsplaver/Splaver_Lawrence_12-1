@@ -42,6 +42,9 @@
                         <div class="row text-center">@ta.Activity.ActivityName</div>
                     }
                 </td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@trip.TripId" class="btn btn-primary">Delete</a>
+                </td>
             </tr>
         }
     </tbody>

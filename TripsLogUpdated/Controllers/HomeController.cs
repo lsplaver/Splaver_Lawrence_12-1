@@ -46,5 +46,14 @@ namespace TripsLogUpdated.Controllers
             };
             return View(vm);
         }
+
+        [HttpPost]
+        public RedirectToActionResult Delete(Trip trip)
+        {
+            data.Trips.Delete(trip);
+            data.Trips.Save();
+            TempData["message"] = $"{trip.Destination} between {trip.StartDate} and {trip.EndDate} has been deleted.";
+            return RedirectToAction("Index");
+        }
     }
 }
