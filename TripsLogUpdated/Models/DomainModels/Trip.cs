@@ -18,7 +18,7 @@ namespace TripsLogUpdated.Models
         public int DestinationId { get; set; }
         public Destination Destination { get; set; }
 
-        public int AccommodationId { get; set; }
+        public int? AccommodationId { get; set; }
         public Accommodation Accommodation { get; set; }
 
         public ICollection<TripActivity> TripActivities { get; set; }

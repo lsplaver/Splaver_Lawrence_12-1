@@ -57,7 +57,7 @@ namespace TripsLogUpdated.Migrations
                     StartDate = table.Column<DateTime>(nullable: false),
                     EndDate = table.Column<DateTime>(nullable: false),
                     DestinationId = table.Column<int>(nullable: false),
-                    AccommodationId = table.Column<int>(nullable: false)
+                    AccommodationId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {

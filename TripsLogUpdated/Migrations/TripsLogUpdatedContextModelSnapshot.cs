@@ -152,7 +152,7 @@ namespace TripsLogUpdated.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AccommodationId")
+                    b.Property<int?>("AccommodationId")
                         .HasColumnType("int");
 
                     b.Property<int>("DestinationId")
@@ -221,8 +221,7 @@ namespace TripsLogUpdated.Migrations
                     b.HasOne("TripsLogUpdated.Models.Accommodation", "Accommodation")
                         .WithMany("Trips")
                         .HasForeignKey("AccommodationId")
-                        .OnDelete(DeleteBehavior.SetNull)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.HasOne("TripsLogUpdated.Models.Destination", "Destination")
                         .WithMany("Trips")
