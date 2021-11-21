@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,9 +23,15 @@ namespace TripsLogUpdated.Controllers
                 case "page2":
                     this.LoadViewBag("Add");
                     vm.PageNumber = 2;
+                    int destinationId = (int)TempData.Peek(nameof(Trip.DestinationId));
+                    int? accommodationId = (int?)TempData.Peek(nameof(Trip.AccommodationId));
+                    DateTime startDate = (DateTime)TempData.Peek(nameof(Trip.StartDate));
+                    DateTime endDate = (DateTime)TempData.Peek(nameof(Trip.EndDate));
+                    vm.Trip = new Trip { DestinationId = destinationId, AccommodationId = accommodationId, StartDate = startDate, EndDate = endDate };
                     return View("Add2", vm);
                 case "page1":
                 default:
+                    TempData.Clear();
                     this.LoadViewBag("Add");
                     vm.PageNumber = 1;
                     return View("Add1", vm);
@@ -51,14 +58,56 @@ namespace TripsLogUpdated.Controllers
                     //TempData[nameof(Trip.Destination.DestinationName)] = vm.Trip.Destination.DestinationName.Where(d => d.;
                     return RedirectToAction("Add", new { id = "Page2" });
                 case 2:
-                    vm.Trip.DestinationId = (int)TempData[nameof(Trip.DestinationId)];
-                    vm.Trip.AccommodationId = (int)TempData[nameof(Trip.AccommodationId)];
+                    //int[] tempActivities;
+                    //if (vm.SelectedActivities != null)
+                    //{
+                    //    tempActivities = new int[vm.SelectedActivities.Count()];
+                    //    for (int x = 0; x < tempActivities.Count(); x++)
+                    //    {
+                    //        tempActivities[x] = vm.SelectedActivities.ElementAt(x);
+                    //    }
+                    //    vm = new TripAddViewModel();
+
+                    //    vm.Trip.TripActivities = new List<TripActivity>();
+                    //    foreach (int activityId in tempActivities)
+                    //    {
+                    //        vm.Trip.TripActivities.Add(new TripActivity { ActivityId = activityId });
+                    //    }
+                    //}
+                    int destinationId = (int)TempData.Peek(nameof(Trip.DestinationId));
+                    int? accommodationId = (int?)TempData.Peek(nameof(Trip.AccommodationId));
+                    DateTime startDate = (DateTime)TempData.Peek(nameof(Trip.StartDate));
+                    DateTime endDate = (DateTime)TempData.Peek(nameof(Trip.EndDate));
+                    vm.Trip = new Trip { DestinationId = destinationId, AccommodationId = accommodationId, StartDate = startDate, EndDate = endDate };
+
+                    if (vm.SelectedActivities != null)
+                    {
+                        foreach (int activityId in vm.SelectedActivities)
+                        {
+
+                            if (vm.Trip.TripActivities == null)
+                            {
+                                vm.Trip.TripActivities = new List<TripActivity>();
+                            }
+
+                            vm.Trip.TripActivities.Add(new TripActivity { ActivityId = activityId });
+
+                        }
+                    }
+
+
+                    //int? temp = vm.Trip.DestinationId;
+                    //int intTemp = (int)TempData[nameof(Trip.DestinationId)];
+                    vm.Trip.DestinationId =  (int)TempData[nameof(Trip.DestinationId)];
+                    vm.Trip.AccommodationId = (int?)TempData[nameof(Trip.AccommodationId)];
                     vm.Trip.StartDate = (DateTime)TempData[nameof(Trip.StartDate)];
                     vm.Trip.EndDate = (DateTime)TempData[nameof(Trip.EndDate)];
-
+                    string destinationName = null;
+                    vm.Destinations = new List<Destination>();
+                    destinationName = vm.Destinations.Where(d => d.DestinationId == vm.Trip.DestinationId).ToString();
                     data.Trips.Insert(vm.Trip);
                     data.Trips.Save();
-                    TempData["message"] = $"Trip to {vm.Trip.Destination.DestinationName} between {vm.Trip.StartDate} and {vm.Trip.EndDate} has been added.";
+                    TempData["message"] = $"Trip to {destinationName} between {vm.Trip.StartDate} and {vm.Trip.EndDate} has been added.";
                     return RedirectToAction("Index", "Home");
                 default:
                     return RedirectToAction("Index", "Home");
@@ -88,6 +137,11 @@ namespace TripsLogUpdated.Controllers
             {
                 OrderBy = a => a.ActivityId
             });
+
+            ViewBag.ActivityCount = data.Activities.List(new QueryOptions<Activity>
+            {
+                OrderBy = a => a.ActivityId
+            }).Count();
 
             ViewBag.Operation = operation;
         }

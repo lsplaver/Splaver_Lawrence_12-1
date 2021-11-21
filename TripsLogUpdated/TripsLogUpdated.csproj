@@ -9,6 +9,10 @@
     <Compile Remove="Migrations\20211120021604_UpdatedAccommodationIdNullableInTrip.Designer.cs" />
     <Compile Remove="Migrations\20211120213545_PopulateTripActivityTable.cs" />
     <Compile Remove="Migrations\20211120213545_PopulateTripActivityTable.Designer.cs" />
+    <Compile Remove="Migrations\20211121184140_AddedNoAccommodationToAccommodationsTable.cs" />
+    <Compile Remove="Migrations\20211121184140_AddedNoAccommodationToAccommodationsTable.Designer.cs" />
+    <Compile Remove="Migrations\20211121184443_AddedNoAccommodationToAccommodationsTable.cs" />
+    <Compile Remove="Migrations\20211121184443_AddedNoAccommodationToAccommodationsTable.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

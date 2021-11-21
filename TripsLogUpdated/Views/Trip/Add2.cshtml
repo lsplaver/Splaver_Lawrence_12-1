@@ -17,11 +17,10 @@
     <input type="hidden" asp-for="PageNumber" />
 
     <div class="form-group row">
-        <label asp-for="TripActivity.ActivityId">Activities:</label>
-        <select asp-for="TripActivity.ActivityId" class="form-control"
-                asp-items='@new MultiSelectList(ViewBag.Activity, "ActivityId", "ActivityName")'>
-            Hold down the CTRL key to select multiple items.
-        </select>
+        <label asp-for="SelectedActivities">Hold down the CTRL key to select multiple items.</label>
+        <select asp-for="SelectedActivities" class="form-control"
+                asp-items='@new SelectList(ViewBag.Activity, "ActivityId", "ActivityName")'
+                multipl size="@ViewBag.ActivityCount"></select>
     </div>
     <div>
         <button type="submit" class="btn btn-dark">Next</button>

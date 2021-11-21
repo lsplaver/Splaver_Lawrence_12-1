@@ -4,9 +4,9 @@
     ViewBag.Title = "Trip Log";
     string userMessage = TempData?["UserMessage"]?.ToString() ?? "";
 }
-@if (userMessage != "")
+@section SubHead
 {
-    @section SubHead
+    @if (userMessage != "")
     {
         <h2>@userMessage</h2>
 
@@ -32,9 +32,18 @@
                 <td>@trip.StartDate?.ToShortDateString()</td>
                 <td>@trip.EndDate?.ToShortDateString()</td>
                 <td class="col-6">
-                    <div class="row text-center">@trip.Accommodation.AccommodationName</div>
-                    <div class="row text-center">@trip.Accommodation.AccommodationPhone</div>
-                    <div class="row text-center">@trip.Accommodation.AccommodationEmail</div>
+                    @if (trip.Accommodation != null)
+                    {
+                        <div class="row text-center">@trip.Accommodation.AccommodationName</div>
+                        <div class="row text-center">@trip.Accommodation.AccommodationPhone</div>
+                        <div class="row text-center">@trip.Accommodation.AccommodationEmail</div>
+                    }
+                    else
+                    {
+                        <div class="row text-center"></div>
+                        <div class="row text-center"></div>
+                        <div class="row text-center"></div>
+                    }
                 </td>
                 <td class="col-6">
                     @foreach (var ta in trip.TripActivities)
@@ -43,7 +52,7 @@
                     }
                 </td>
                 <td>
-                    <a asp-action="Delete" asp-route-id="@trip.TripId" class="btn btn-primary">Delete</a>
+                    <a asp-action="Delete" asp-controller="Home" asp-route-id="@trip.TripId" class="btn btn-primary">Delete</a>
                 </td>
             </tr>
         }

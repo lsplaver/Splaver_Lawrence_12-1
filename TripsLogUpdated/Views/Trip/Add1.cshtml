@@ -17,15 +17,20 @@
     <input type="hidden" asp-for="PageNumber" />
 
     <div class="form-group">
-        <label asp-for="Trip.DestinationId">Destination</label>
+        <div class="row">
+            <label asp-for="Trip.DestinationId">Destination</label>
+            <a class="col ml-4" asp-area="Admin" asp-controller="Admin" asp-action="Manage">Manage destinations</a>
+        </div>
         <select asp-for="Trip.DestinationId" class="form-control" asp-items="@(new SelectList(ViewBag.Destination, "DestinationId", "DestinationName"))">
-            <option value="0"></option>
         </select>
     </div>
     <div class="form-group">
-        <label asp-for="Trip.AccommodationId">Accommodations</label>
+        <div class="row">
+            <label asp-for="Trip.AccommodationId">Accommodations</label>
+            <a class="col ml-4" asp-area="Admin" asp-controller="Admin" asp-action="Manage">Manage accommodations</a>
+        </div>
         <select asp-for="Trip.AccommodationId" class="form-control" asp-items="@(new SelectList(ViewBag.Accommodation, "AccommodationId", "AccommodationName"))">
-            <option value="0"></option>
+            <option value=""></option>
         </select>
     </div>
     <div class="form-group">

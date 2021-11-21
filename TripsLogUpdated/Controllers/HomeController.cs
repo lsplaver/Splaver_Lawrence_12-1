@@ -47,13 +47,31 @@ namespace TripsLogUpdated.Controllers
             return View(vm);
         }
 
-        [HttpPost]
+        //[HttpGet]
+        //public ViewResult Delete(int id)
+        //{
+        //    var t = this.GetTrip(id);
+        //    return View(t);
+        //}
+
+        //[HttpPost]
         public RedirectToActionResult Delete(Trip trip)
         {
             data.Trips.Delete(trip);
             data.Trips.Save();
             TempData["message"] = $"{trip.Destination} between {trip.StartDate} and {trip.EndDate} has been deleted.";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "home", new { id = 0 });
+        }
+
+        private Trip GetTrip(int id)
+        {
+            var tripOptions = new QueryOptions<Trip>
+            {
+                Includes = "Accommodation, Destination",
+                Where = t => t.TripId == id
+            };
+
+            return data.Trips.Get(tripOptions);
         }
     }
 }
