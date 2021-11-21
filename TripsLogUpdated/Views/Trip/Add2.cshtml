@@ -1,0 +1,30 @@
+﻿@model TripAddViewModel
+@{
+    ViewBag.Title = "Add Trip - Page 2";
+    ViewBag.SubHeader = $"Add Things To Do in "; //{TempData.Peek(nameof(Trip.Destination.DestinationName))}";
+}
+
+@section Scripts
+{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
+
+
+<form asp-action="Add" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <input type="hidden" asp-for="PageNumber" />
+
+    <div class="form-group row">
+        <label asp-for="TripActivity.ActivityId">Activities:</label>
+        <select asp-for="TripActivity.ActivityId" class="form-control"
+                asp-items='@new MultiSelectList(ViewBag.Activity, "ActivityId", "ActivityName")'>
+            Hold down the CTRL key to select multiple items.
+        </select>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-dark">Next</button>
+        <a asp-action="Cancel" class="btn btn-outline-dark">Cancal</a>
+    </div>
+</form>
