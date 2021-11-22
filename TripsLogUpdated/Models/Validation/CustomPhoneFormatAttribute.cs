@@ -11,9 +11,14 @@ namespace TripsLogUpdated.Models.Validation
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value is Regex)
+            if (value is null)
+            {
+                return ValidationResult.Success;
+            }
+            if (value is string)
             {
                 string stringToCheck = value.ToString();
+
                 bool isCorrectFormat = false;
                 isCorrectFormat = Regex.IsMatch(stringToCheck, "^" + Regex.Escape("(") + "[0-9]{3}" + Regex.Escape(")") + Regex.Escape("-") + "[0-9]{3}" + Regex.Escape("-") + "[0-9]{4}$");
                 if (isCorrectFormat)

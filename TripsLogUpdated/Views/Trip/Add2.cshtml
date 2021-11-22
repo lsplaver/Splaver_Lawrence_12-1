@@ -10,6 +10,10 @@
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
 
+@section SubHead
+{
+    <h2>@ViewBag.SubHeader</h2>
+}
 
 <form asp-action="Add" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>

@@ -1,0 +1,115 @@
+﻿@model TripManageViewModel
+@{
+    ViewBag.Title = "Trip - Manage";
+    ViewBag.SubHeader = "Manage Destinations, Accommodations, and Activities";
+}
+
+@section SubHead
+{
+    <h2>@ViewBag.SubHeader</h2>
+    @if (TempData.Peek("messageDestination") != null)
+    {
+        <h4>@TempData["messageDestination"].ToString()</h4>
+    }
+    @if (TempData.Peek("messageAccommodation") != null)
+    {
+        <h4>@TempData["messageAccommodation"].ToString()</h4>
+    }
+    @if (TempData.Peek("messageActivity") != null)
+    {
+        <h4>@TempData["messageActivity"].ToString()</h4>
+    }
+    @if (TempData.Peek("destinationDeleted") != null)
+    {
+        <h4>@TempData["destinationDeleted"].ToString()</h4>
+    }
+    @if (TempData.Peek("accommodationDeleted") != null)
+    {
+        <h4>@TempData["accommodationDeleted"].ToString()</h4>
+    }
+    @if (TempData.Peek("activityDeleted") != null)
+    {
+        <h4>@TempData["activityDeleted"].ToString()</h4>
+    }
+}
+<div class="col-5">
+    <div class="container">
+        <h4>Add</h4>
+        <form asp-action="Add" asp-area="Admin" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group border">
+                <div class="row">
+                    <label asp-for="Destination.DestinationName">Destination</label>
+                </div>
+                <div class="row">
+                    <input type="text" asp-for="Destination.DestinationName" />
+                </div>
+            </div>
+            <div class="form-group border">
+                <div class="row">
+                    <label asp-for="Accommodation.AccommodationName">Accommodation Name</label>
+                </div>
+                <div class="row">
+                    <input type="text" asp-for="Accommodation.AccommodationName" />
+                </div>
+                <span asp-validation-for="Accommodation.AccommodationName" class="text-danger"></span>
+                <div class="row">
+                    <label asp-for="Accommodation.AccommodationPhone">Accommodation Phone</label>
+                </div>
+                <div class="row">
+                    <input type="text" asp-for="Accommodation.AccommodationPhone" />
+                </div>
+                <div class="row">
+                    <label asp-for="Accommodation.AccommodationEmail">Accommodation Email</label>
+                </div>
+                <div class="row">
+                    <input type="text" asp-for="Accommodation.AccommodationEmail" />
+                </div>
+            </div>
+            <div class="form-group border">
+                <div class="row">
+                    <label asp-for="Activity.ActivityName">Activity</label>
+                </div>
+                <div class="row">
+                    <input type="text" asp-for="Activity.ActivityName" />
+                </div>
+            </div>
+            <button class="btn btn-primary" type="submit">Add</button>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Cancel</a>
+        </form>
+    </div>
+</div>
+<div class="col-2"></div>
+<div class="col-5">
+    <h4>Delete</h4>
+    <div class="container">
+        <form asp-action="Delete" method="post">
+            <div class="form-group">
+                <div class="row">
+                    <label asp-for="Destination.DestinationId">Destination</label>
+                </div>
+                <select asp-for="Destination.DestinationId" class="form-control" asp-items="@(new SelectList(ViewBag.DeleteDestinationId, "DestinationId", "DestinationName"))">
+                    <option value="0"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <label asp-for="Accommodation.AccommodationId">Accommodation</label>
+                </div>
+                <select asp-for="Accommodation.AccommodationId" class="form-control" asp-items="@(new SelectList(ViewBag.DeleteAccommodationId, "AccommodationId", "AccommodationName"))">
+                    <option value="0"></option>
+                </select>
+            </div>
+            <div class="form-group">
+                <div class="row">
+                    <label asp-for="Activity.ActivityId">Activity</label>
+                </div>
+                <select asp-for="Activity.ActivityId" class="form-control" asp-items="@(new SelectList(ViewBag.DeleteActivityId, "ActivityId", "ActivityName"))">
+                    <option value="0"></option>
+                </select>
+            </div>
+            <button class="btn btn-primary" type="submit">Delete</button>
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-outline-primary">Cancel</a>
+        </form>
+    </div>
+</div>

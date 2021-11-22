@@ -10,6 +10,10 @@
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 }
 
+@section SubHead
+{
+    <h2>@ViewBag.SubHeader</h2>
+}
 
 <form asp-action="Add" method="post">
     <div asp-validation-summary="All" class="text-danger"></div>
@@ -19,27 +23,31 @@
     <div class="form-group">
         <div class="row">
             <label asp-for="Trip.DestinationId">Destination</label>
-            <a class="col ml-4" asp-area="Admin" asp-controller="Admin" asp-action="Manage">Manage destinations</a>
+            <a class="col ml-4" asp-area="Admin" asp-controller="Trip" asp-action="Index">Manage destinations</a>
         </div>
         <select asp-for="Trip.DestinationId" class="form-control" asp-items="@(new SelectList(ViewBag.Destination, "DestinationId", "DestinationName"))">
         </select>
+        <span asp-validation-for="Trip.DestinationId" class="text-danger"></span>
     </div>
     <div class="form-group">
         <div class="row">
             <label asp-for="Trip.AccommodationId">Accommodations</label>
-            <a class="col ml-4" asp-area="Admin" asp-controller="Admin" asp-action="Manage">Manage accommodations</a>
+            <a class="col ml-4" asp-area="Admin" asp-controller="Trip" asp-action="Index">Manage accommodations</a>
         </div>
         <select asp-for="Trip.AccommodationId" class="form-control" asp-items="@(new SelectList(ViewBag.Accommodation, "AccommodationId", "AccommodationName"))">
             <option value=""></option>
         </select>
+        <span asp-validation-for="Trip.AccommodationId" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Trip.StartDate">Start Date</label>
         <input type="date" asp-for="Trip.StartDate" class="form-control" />
+        <span asp-validation-for="Trip.StartDate" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Trip.EndDate">End Date</label>
         <input type="date" asp-for="Trip.EndDate" class="form-control" />
+        <span asp-validation-for="Trip.EndDate" class="text-danger"></span>
     </div>
     <div>
         <button type="submit" class="btn btn-dark">Next</button>

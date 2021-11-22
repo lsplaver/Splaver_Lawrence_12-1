@@ -55,8 +55,10 @@ namespace TripsLogUpdated.Controllers
         //}
 
         //[HttpPost]
-        public RedirectToActionResult Delete(Trip trip)
+        public RedirectToActionResult Delete(int id)//Trip trip)
         {
+            Trip trip = new Trip();
+            trip = GetTrip(id);
             data.Trips.Delete(trip);
             data.Trips.Save();
             TempData["message"] = $"{trip.Destination} between {trip.StartDate} and {trip.EndDate} has been deleted.";
