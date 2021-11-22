@@ -53,48 +53,28 @@ namespace TripsLogUpdated.Areas.Admin.Controllers
             return RedirectToAction("Index", "Trip");
         }
 
-        public RedirectToActionResult Delete(TripManageViewModel vm)//Trip trip)
+        public RedirectToActionResult Delete(TripManageViewModel vm)
         {
             if (vm.Accommodation.AccommodationId > 0)
             {
-                //Accommodation accommodation = new Accommodation();
-                //accommodation = GetAccommodation(id);
-                
                 data.Accommodations.Delete(vm.Accommodation);
                 data.Accommodations.Save();
                 TempData["accomodationDeleted"] = $"{vm.Accommodation.AccommodationName} has been deleted.";
             }
             if (vm.Activity.ActivityId > 0)
             {
-                //Accommodation accommodation = new Accommodation();
-                //accommodation = GetAccommodation(id);
-
                 data.Activities.Delete(vm.Activity);
                 data.Activities.Save();
                 TempData["activityDeleted"] = $"{vm.Activity.ActivityName} has been deleted.";
             }
             if (vm.Destination.DestinationId > 0)
             {
-                //Accommodation accommodation = new Accommodation();
-                //accommodation = GetAccommodation(id);
-
                 data.Destinations.Delete(vm.Destination);
                 data.Destinations.Save();
                 TempData["destinationDeleted"] = $"{vm.Destination.DestinationName} has been deleted.";
             }
             return RedirectToAction("Index", "Trip");
         }
-
-        //private Accommodation GetAccommodation(int id)
-        //{
-        //    var accommodationOptions = new QueryOptions<Trip>
-        //    {
-        //        Where = t => t.TripId == id
-        //    };
-
-        //    return data.Accommodations.Get(accommodationOptions);
-        //}
-
 
         private void LoadViewBag(string operation)
         {

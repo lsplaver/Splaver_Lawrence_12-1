@@ -1,7 +1,7 @@
 ﻿@model TripAddViewModel
 @{
     ViewBag.Title = "Add Trip - Page 2";
-    ViewBag.SubHeader = $"Add Things To Do in "; //{TempData.Peek(nameof(Trip.Destination.DestinationName))}";
+    ViewBag.SubHeader = $"Add Things To Do in {TempData.Peek("destinationName").ToString()}";
 }
 
 @section Scripts

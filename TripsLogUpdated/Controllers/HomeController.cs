@@ -10,36 +10,19 @@ namespace TripsLogUpdated.Controllers
 {
     public class HomeController : Controller
     {
-        //private TripsLogUpdatedContext context { get; set; }
-
         private TripsLogUpdatedUnitOfWork data { get; set; }
 
-        public HomeController(TripsLogUpdatedContext context) => data = new TripsLogUpdatedUnitOfWork(context); //=> this.context = context;
+        public HomeController(TripsLogUpdatedContext context) => data = new TripsLogUpdatedUnitOfWork(context);
 
         [HttpGet]
         public ViewResult Index()
         {
-            //IQueryable<Trip> query = context.Trips
-            //    .Include(t => t.Accommodation)
-            //    .Include(t => t.Destination)
-            //    .Include(t => t.TripActivities)
-            //    .OrderBy(t => t.StartDate);
-
-            //TripViewModel vm = new TripViewModel
-            //{
-            //    Trips = query.ToList()
-            //};
-
-            //return View(vm);
             var tripOptions = new QueryOptions<Trip>
             {
                 Includes = "Accommodation, Destination, TripActivities.Activity"
             };
 
             tripOptions.OrderBy = t => t.StartDate;
-            //var vm = new TripViewModel();
-            //vm = (TripViewModel)data.Trips.List(tripOptions);
-            //vm = tripOptions;
             var vm = new TripViewModel
             {
                 Trips = data.Trips.List(tripOptions)
@@ -47,15 +30,7 @@ namespace TripsLogUpdated.Controllers
             return View(vm);
         }
 
-        //[HttpGet]
-        //public ViewResult Delete(int id)
-        //{
-        //    var t = this.GetTrip(id);
-        //    return View(t);
-        //}
-
-        //[HttpPost]
-        public RedirectToActionResult Delete(int id)//Trip trip)
+        public RedirectToActionResult Delete(int id)
         {
             Trip trip = new Trip();
             trip = GetTrip(id);

@@ -11,9 +11,6 @@ namespace TripsLogUpdated.Models
     {
         public void Configure(EntityTypeBuilder<Activity> entity)
         {
-            //entity.HasOne(a => a.Trips)
-            //    .WithMany(ta => ta.)
-
             entity.HasData(
                 new Activity { ActivityId = 1, ActivityName = "Swimming" },
                 new Activity { ActivityId = 2, ActivityName = "Hiking" },

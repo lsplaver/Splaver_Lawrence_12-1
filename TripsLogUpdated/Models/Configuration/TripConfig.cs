@@ -19,9 +19,6 @@ namespace TripsLogUpdated.Models
                 .WithMany(a => a.Trips)
                 .OnDelete(DeleteBehavior.SetNull);
 
-            //entity.HasOne(t => t.TripActivities)
-            //    .WithMany(ta => ta.)
-
             entity.HasData(
                 new Trip { TripId = 1, DestinationId = 1, AccommodationId = 1, StartDate = DateTime.Parse("7/2/2020"), EndDate = DateTime.Parse("7/9/2020") },
                 new Trip { TripId = 2, DestinationId = 2, AccommodationId = 2, StartDate = DateTime.Parse("10/25/2020"), EndDate = DateTime.Parse("11/1/2020") },
